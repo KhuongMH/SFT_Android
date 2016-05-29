@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.khuongman.sft_android.Adapter.NavigationAdapter;
+import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
 import com.example.khuongman.sft_android.Fragment.MainFragment;
 import com.example.khuongman.sft_android.R;
@@ -37,9 +38,9 @@ public class MainActivity extends FragmentActivity {
         iv_navigation = (ImageView) findViewById(R.id.iv_navigation);
         lv_navigation = (ListView)findViewById(R.id.lv_left_navigation);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
+        Constant.FRAME_ID = R.id.fragment_skeleton;
         ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_skeleton, new MainFragment());
+        ft.replace(Constant.FRAME_ID, new MainFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
         initNavigation();
@@ -57,14 +58,25 @@ public class MainActivity extends FragmentActivity {
         mDrawerToggle.syncState();
         drawerLayout.setDrawerListener(mDrawerToggle);
         List<LayoutIDWithTitle> list = new ArrayList<>();
-        list.add(new LayoutIDWithTitle(0,"Kiến Thức Nông Nghiệp"));
-        list.add(new LayoutIDWithTitle(1,"Giá Cả Thị Trường"));
-        list.add(new LayoutIDWithTitle(2,"Giao Dịch Nông Sản"));
-        list.add(new LayoutIDWithTitle(3,"Hỏi Đáp - Thắc Mắc"));
-        list.add(new LayoutIDWithTitle(4,"Cây Trồng Của Bạn"));
-        list.add(new LayoutIDWithTitle(5,"Grab Đi Chợ"));
-        navigationAdapter = new EasyAdapter<>(getApplicationContext(), NavigationAdapter.class,list);
+        list.add(new LayoutIDWithTitle(Constant.KIEN_THUC_NONG_NGHIEP,"Kiến Thức Nông Nghiệp"));
+        list.add(new LayoutIDWithTitle(Constant.GIA_CA_THI_TRUONG,"Giá Cả Thị Trường"));
+        list.add(new LayoutIDWithTitle(Constant.BUON_BAN_NONG_SAN,"Buôn Bán Nông Sản"));
+        list.add(new LayoutIDWithTitle(Constant.HOI_DAP_THAC_MAC,"Hỏi Đáp - Thắc Mắc"));
+        list.add(new LayoutIDWithTitle(Constant.KHU_VUON_CUA_BAN,"Khu vườn Của Bạn"));
+        list.add(new LayoutIDWithTitle(Constant.GRAB_DI_CHO,"Grab Đi Chợ"));
+        navigationAdapter = new EasyAdapter<>(this, NavigationAdapter.class,list);
         lv_navigation.setAdapter(navigationAdapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount()==0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+        if (getFragmentManager().getBackStackEntryCount() == 1) {
+            findViewById(R.id.lv_right_navigation).setVisibility(View.GONE);
+        }
+    }
 }

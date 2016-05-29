@@ -35,6 +35,6 @@ public class NavigationAdapter extends ItemViewHolder<LayoutIDWithTitle> {
                 "fonts/BLKCHCRY.TTF");
         tv_arrow.setTypeface(face);
         tv_navigation.setText(layoutIDWithTitle.getTitle());
-        tv_navigation.setOnClickListener(new MenuClickEvent(layoutIDWithTitle.getId()));
+        tv_navigation.setOnClickListener(new MenuClickEvent(getContext(),layoutIDWithTitle.getId()));
     }
 }
