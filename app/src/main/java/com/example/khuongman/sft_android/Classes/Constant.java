@@ -6,6 +6,7 @@ package com.example.khuongman.sft_android.Classes;
 public class Constant {
     public static int FRAME_ID = 0;
     public static int FRAGMENT_COUNT = 0;
+    public static int CURRENT_FRAGMENT = -1;
 
     //LEFT NAVIGATION
     public final static int KIEN_THUC_NONG_NGHIEP = 0;

@@ -28,12 +28,12 @@ import uk.co.ribot.easyadapter.EasyAdapter;
 /**
  * Created by Man Huynh Khuong on 28/05/16.
  */
-public class MenuClickEvent implements View.OnClickListener {
+public class LeftMenuClickEvent implements View.OnClickListener {
     int layoutID;
     FragmentTransaction ft;
     Context context;
 
-    public MenuClickEvent(Context context, int layoutID) {
+    public LeftMenuClickEvent(Context context, int layoutID) {
         this.context = context;
         this.layoutID = layoutID;
     }
@@ -41,6 +41,12 @@ public class MenuClickEvent implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         MainActivity mainActivity = (MainActivity) context;
+        if(Constant.CURRENT_FRAGMENT == layoutID){
+            ((DrawerLayout) mainActivity.findViewById(R.id.drawer_layout))
+                    .closeDrawer(Gravity.LEFT);
+            return;
+        }
+        Constant.CURRENT_FRAGMENT = layoutID;
         ListView rightNavigation = (ListView) mainActivity.findViewById(R.id.lv_right_navigation);
         List<LayoutIDWithTitle> list = new ArrayList<>();
         EasyAdapter<LayoutIDWithTitle> adapter = new EasyAdapter<>(mainActivity, NavigationAdapter.class,list);
@@ -49,10 +55,10 @@ public class MenuClickEvent implements View.OnClickListener {
                 .closeDrawer(Gravity.LEFT);
         ft = mainActivity.getFragmentManager().beginTransaction();
         rightNavigation.setAdapter(adapter);
+        ((DrawerLayout) mainActivity.findViewById(R.id.drawer_layout))
+                .closeDrawer(Gravity.LEFT);
         switch (layoutID) {
             case Constant.KIEN_THUC_NONG_NGHIEP: {
-                ((DrawerLayout) mainActivity.findViewById(R.id.drawer_layout))
-                        .closeDrawer(Gravity.LEFT);
                 ft.replace(Constant.FRAME_ID, new KnowledgeFragment());
                 list.clear();
                 list.add(new LayoutIDWithTitle(Constant.RAU_CU_QUA, "Rau Củ Quả"));
@@ -109,7 +115,6 @@ public class MenuClickEvent implements View.OnClickListener {
                 break;
             }
         }
-
         ft.addToBackStack("PhamThiXuanHa " + Constant.FRAGMENT_COUNT++);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();

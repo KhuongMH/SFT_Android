@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity {
             super.onBackPressed();
         } else {
             getFragmentManager().popBackStack();
+            Constant.CURRENT_FRAGMENT = -1;
         }
         if (getFragmentManager().getBackStackEntryCount() == 1) {
             findViewById(R.id.lv_right_navigation).setVisibility(View.GONE);

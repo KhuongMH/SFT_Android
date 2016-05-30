@@ -1,13 +1,11 @@
 package com.example.khuongman.sft_android.Adapter;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
-import com.example.khuongman.sft_android.Event.MenuClickEvent;
+import com.example.khuongman.sft_android.Event.LeftMenuClickEvent;
 import com.example.khuongman.sft_android.R;
 
 import uk.co.ribot.easyadapter.ItemViewHolder;
@@ -35,6 +33,6 @@ public class NavigationAdapter extends ItemViewHolder<LayoutIDWithTitle> {
                 "fonts/BLKCHCRY.TTF");
         tv_arrow.setTypeface(face);
         tv_navigation.setText(layoutIDWithTitle.getTitle());
-        tv_navigation.setOnClickListener(new MenuClickEvent(getContext(),layoutIDWithTitle.getId()));
+        tv_navigation.setOnClickListener(new LeftMenuClickEvent(getContext(),layoutIDWithTitle.getId()));
     }
 }
