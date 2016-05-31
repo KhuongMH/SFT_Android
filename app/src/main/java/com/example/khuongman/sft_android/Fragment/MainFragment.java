@@ -18,17 +18,17 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        view.findViewById(R.id.ll_top_1).setOnClickListener(new LeftMenuClickEvent(getContext(),
+        view.findViewById(R.id.ll_top_1).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.KIEN_THUC_NONG_NGHIEP));
-        view.findViewById(R.id.ll_top_2).setOnClickListener(new LeftMenuClickEvent(getContext(),
+        view.findViewById(R.id.ll_top_2).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.GIA_CA_THI_TRUONG));
-        view.findViewById(R.id.ll_middle_1).setOnClickListener(new LeftMenuClickEvent(getContext(),
+        view.findViewById(R.id.ll_middle_1).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.BUON_BAN_NONG_SAN));
-        view.findViewById(R.id.ll_middle_2).setOnClickListener(new LeftMenuClickEvent(getContext(),
+        view.findViewById(R.id.ll_middle_2).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.HOI_DAP_THAC_MAC));
-        view.findViewById(R.id.ll_bottom_1).setOnClickListener(new LeftMenuClickEvent(getContext(),
+        view.findViewById(R.id.ll_bottom_1).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.KHU_VUON_CUA_BAN));
-        view.findViewById(R.id.ll_bottom_2).setOnClickListener(new LeftMenuClickEvent(getContext(),
+        view.findViewById(R.id.ll_bottom_2).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.GRAB_DI_CHO));
 
         return view;

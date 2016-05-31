@@ -5,6 +5,7 @@ package com.example.khuongman.sft_android.Classes;
  */
 public class Constant {
     public static int FRAME_ID = 0;
+    public static String FRAME_TAG = "PhamXuanHa ";
     public static int FRAGMENT_COUNT = 0;
     public static int CURRENT_FRAGMENT = -1;
 
