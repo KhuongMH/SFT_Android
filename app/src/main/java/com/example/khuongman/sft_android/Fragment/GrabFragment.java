@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import com.example.khuongman.sft_android.Activity.MainActivity;
 import com.example.khuongman.sft_android.Classes.GPSTracker;
 import com.example.khuongman.sft_android.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 //import com.google.android.gms.maps.GoogleMap;
 //import com.google.android.gms.maps.MapFragment;
 //import com.google.android.gms.maps.model.LatLng;
@@ -25,7 +29,7 @@ import com.example.khuongman.sft_android.R;
  */
 public class GrabFragment extends Fragment {
 
-//    GoogleMap map;
+    GoogleMap map;
     View view;
     Activity activity;
 
@@ -36,16 +40,18 @@ public class GrabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_grab, container, false);
         activity = getActivity();
-//        if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            requestLocationPermission();
-//            GPSTracker gps = new GPSTracker(activity);
-//            map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-//            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-//            map.getUiSettings().setZoomGesturesEnabled(true);
+        if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestLocationPermission();
+            GPSTracker gps = new GPSTracker(activity);
+            map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            map.getUiSettings().setZoomGesturesEnabled(true);
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(gps.getLatitude(), gps.getLongitude()), 13));
 //            MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(gps.getLatitude(), gps.getLongitude())).title("");
 //            map.addMarker(markerOptions);
-//        }
+        }
 
 
 

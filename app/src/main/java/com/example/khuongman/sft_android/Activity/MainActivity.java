@@ -2,6 +2,7 @@ package com.example.khuongman.sft_android.Activity;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -34,6 +35,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MultiDex.install(getApplicationContext());
         setContentView(R.layout.activity_main);
         iv_navigation = (ImageView) findViewById(R.id.iv_navigation);
         lv_navigation = (ListView)findViewById(R.id.lv_left_navigation);
