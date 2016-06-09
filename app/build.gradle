@@ -7,7 +7,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         applicationId "com.example.khuongman.sft_android"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -18,10 +18,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dexOptions {
+        incremental = true;
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile 'com.android.support:design:23.2.1'
     compile 'com.google.android.gms:play-services:9.0.2'
     compile 'com.squareup.picasso:picasso:2.3.4'

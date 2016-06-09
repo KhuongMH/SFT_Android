@@ -38,8 +38,8 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         MultiDex.install(getApplicationContext());
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         iv_navigation = (ImageView) findViewById(R.id.iv_navigation);
         lv_navigation = (ListView)findViewById(R.id.lv_left_navigation);
