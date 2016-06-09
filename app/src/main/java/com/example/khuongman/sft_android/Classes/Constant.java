@@ -8,6 +8,8 @@ public class Constant {
     public static String FRAME_TAG = "PhamXuanHa ";
     public static int FRAGMENT_COUNT = 0;
     public static int CURRENT_FRAGMENT = -1;
+    public static int LOCATION_PERMISSION = 0;
+    public static int WAIT_PERMISSION = 0;
 
     //LEFT NAVIGATION
     public final static int KIEN_THUC_NONG_NGHIEP = 0;

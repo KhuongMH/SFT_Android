@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 
 /**
  * Created by khuong.man on 5/27/2016.
@@ -36,16 +37,17 @@ public class GPSTracker extends Service implements LocationListener {
             locationManager = (LocationManager) activity.getSystemService(LOCATION_SERVICE);
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
+            Log.d("isNetworkEnabled", isNetworkEnabled + "");
+            Log.d("isGPSEnabled", isGPSEnabled + "");
             //First check Connection From Cellphone
             if(isNetworkEnabled){
                 this.canGetLocation = true;
                 locationManager.requestLocationUpdates(
-                        LocationManager.PROVIDERS_CHANGED_ACTION,
+                        LocationManager.NETWORK_PROVIDER,
                         6000,
                         10, this);
                 if (locationManager != null) {
-                    location = locationManager.getLastKnownLocation(LocationManager.PROVIDERS_CHANGED_ACTION);
+                    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                     if (location != null) {
                         latitude = location.getLatitude();
                         longitude = location.getLongitude();
@@ -53,7 +55,6 @@ public class GPSTracker extends Service implements LocationListener {
                 }
             } else
 
-            //If wifi connection not found, check connection from GPS
             if(isGPSEnabled) {
                 this.canGetLocation = true;
                 locationManager.requestLocationUpdates(

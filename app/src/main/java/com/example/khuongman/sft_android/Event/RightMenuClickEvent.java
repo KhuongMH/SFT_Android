@@ -5,22 +5,11 @@ import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ListView;
 
 import com.example.khuongman.sft_android.Activity.MainActivity;
-import com.example.khuongman.sft_android.Adapter.NavigationAdapter;
 import com.example.khuongman.sft_android.Classes.Constant;
-import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
-import com.example.khuongman.sft_android.Fragment.GrabFragment;
 import com.example.khuongman.sft_android.Fragment.KnowledgeFragment;
-import com.example.khuongman.sft_android.Fragment.OwnFarmFragment;
-import com.example.khuongman.sft_android.Fragment.TradeFragment;
 import com.example.khuongman.sft_android.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import uk.co.ribot.easyadapter.EasyAdapter;
 
 /**
  * Created by Man Huynh Khuong on 29/05/16.

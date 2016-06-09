@@ -1,20 +1,19 @@
 package com.example.khuongman.sft_android.Event;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.khuongman.sft_android.Activity.GrabActivity;
 import com.example.khuongman.sft_android.Activity.MainActivity;
 import com.example.khuongman.sft_android.Adapter.NavigationAdapter;
 import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
-import com.example.khuongman.sft_android.Fragment.GrabFragment;
 import com.example.khuongman.sft_android.Fragment.KnowledgeFragment;
 import com.example.khuongman.sft_android.Fragment.OwnFarmFragment;
 import com.example.khuongman.sft_android.Fragment.TradeFragment;
@@ -32,6 +31,8 @@ public class LeftMenuClickEvent implements View.OnClickListener {
     int layoutID;
     FragmentTransaction ft;
     Context context;
+    MainActivity mainActivity;
+
 
     public LeftMenuClickEvent(Context context, int layoutID) {
         this.context = context;
@@ -40,8 +41,8 @@ public class LeftMenuClickEvent implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        MainActivity mainActivity = (MainActivity) context;
-        if(Constant.CURRENT_FRAGMENT == layoutID){
+        mainActivity = (MainActivity) context;
+        if (Constant.CURRENT_FRAGMENT == layoutID) {
             ((DrawerLayout) mainActivity.findViewById(R.id.drawer_layout))
                     .closeDrawer(Gravity.LEFT);
             return;
@@ -49,7 +50,7 @@ public class LeftMenuClickEvent implements View.OnClickListener {
         Constant.CURRENT_FRAGMENT = layoutID;
         ListView rightNavigation = (ListView) mainActivity.findViewById(R.id.lv_right_navigation);
         List<LayoutIDWithTitle> list = new ArrayList<>();
-        EasyAdapter<LayoutIDWithTitle> adapter = new EasyAdapter<>(mainActivity, NavigationAdapter.class,list);
+        EasyAdapter<LayoutIDWithTitle> adapter = new EasyAdapter<>(mainActivity, NavigationAdapter.class, list);
 
         ((DrawerLayout) mainActivity.findViewById(R.id.drawer_layout))
                 .closeDrawer(Gravity.LEFT);
@@ -104,20 +105,16 @@ public class LeftMenuClickEvent implements View.OnClickListener {
                 break;
             }
             case Constant.GRAB_DI_CHO: {
-                ft.replace(Constant.FRAME_ID, new GrabFragment());
-                list.clear();
-                list.add(new LayoutIDWithTitle(Constant.TIM_NGUOI_DI_CHO, "Tìm Người Đi Chợ"));
-                list.add(new LayoutIDWithTitle(Constant.THONG_TIN_NGUOI_DI_CHO, "Thông Tin Người Đi Chợ"));
-                list.add(new LayoutIDWithTitle(Constant.GUI_YEU_CAU_DI_CHO, "Gửi Yêu Cầu Đi Chợ"));
-                list.add(new LayoutIDWithTitle(Constant.DANH_GIA, "Đánh Giá"));
-                adapter.setItems(list);
-                adapter.notifyDataSetChanged();
-                break;
+                Intent intent = new Intent(mainActivity, GrabActivity.class);
+                mainActivity.startActivity(intent);
+                return;
             }
         }
         ft.addToBackStack("PhamThiXuanHa " + Constant.FRAGMENT_COUNT++);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
         rightNavigation.setVisibility(View.VISIBLE);
+
     }
+
 }
