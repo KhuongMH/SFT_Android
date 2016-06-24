@@ -18,8 +18,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -35,7 +38,6 @@ import java.util.List;
 public class GrabActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
     GoogleMap gm;
     public int flag = 0;
-    List<LatLng> total = new ArrayList<>();
 
     String API_GOOGLE_GET_ROUTE = "https://maps.googleapis.com/maps/api/directions/json?origin=???&destination=???&units=metric&mode=walking";
     String API_GOOGLE_GET_DISTANCE = "https://maps.googleapis.com/maps/api/distancematrix/json?origin=???&destination=???";
@@ -69,67 +71,10 @@ public class GrabActivity extends AppCompatActivity implements ActivityCompat.On
             } else {
                 location = new LatLng(10.786362, 106.691618);
             }
-//            new GetAndDrawRouteWithTwoLocation().execute(location);
-            String tmp = "kp|`Akd_jSIfCKjEKtCErAE`AEjAGbAKjC_@vH[`J?^OxDMbDKtCGz@Ad@KpCQdCKlCGfBCt@M|DElAEx@CtAGfAK|BQlGI|B?NGvAEpAAR";
-            List<LatLng> list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "on|`Acg_jSABA@A@ABs@jA";
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "u{|`Agv_jSh@ZlD|C|AbB^d@JRPXTd@F`@Rh@";
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "}r|`Awe`jS?RM^cAjBi@jA_@r@kAbCo@jA";
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "ol|`Akp`jSGNQd@e@fAc@z@w@lAe@v@IRA?";
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "srz`A{mcjSSXWVWXQREDCBGDa@h@ONMNMNg@l@g@l@g@dAaBhDqA|BmB~DcArBg@~@aFhKaAlB_AfBCHEFQ^{D|HQ\\\\w@xAi@jAYj@kG`My@bB_@v@w@dBWb@";
-            tmp = StringEscapeUtils.unescapeJava(tmp);
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "{oy`AuxdjSAFAB?B?D?BBBBFZ\\\\LN@B@B?B?FALiF|Fe@f@_ElEmBtBiBxBcClCgAlAc@f@}BbCoAtAa@`@";
-            tmp = StringEscapeUtils.unescapeJava(tmp);
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "wyy`AmbejSrApAVZhBjBFD|AvA";
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-
-            tmp = "kvy`AcfejSaAhAi@j@";
-            list = decodePoly(tmp);
-            for (LatLng l : list) {
-                total.add(l);
-            }
-            for (int i = 1; i < total.size(); i++) {
-                gm.addPolyline((new PolylineOptions())
-                        .add(total.get(i-1), total.get(i)).width(6).color(Color.BLUE)
-                        .visible(true));
-            }
+            LatLng[] list = new LatLng[2];
+            list[0] = location;
+            list[1] = new LatLng(10.800329, 106.682823);
+            new GetAndDrawRouteWithTwoLocation().execute(list);
             gm.addMarker(new MarkerOptions().position(location).title("Hello world"));
             gm.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
         }
@@ -142,6 +87,17 @@ public class GrabActivity extends AppCompatActivity implements ActivityCompat.On
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //OK
                 GPSTracker gpsTracker = new GPSTracker(GrabActivity.this);
+                LatLng location;
+                if (gpsTracker.getLocation() != null) {
+                    location = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+                } else {
+                    location = new LatLng(10.786362, 106.691618);
+                }
+                LatLng[] list = new LatLng[2];
+                list[0] = location;
+                list[1] = new LatLng(10.800329, 106.682823);
+                new GetAndDrawRouteWithTwoLocation().execute(list);
+                gm.addMarker(new MarkerOptions().position(location).title("Hello world"));
                 gm.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()), 15));
             } else {
                 //NOT OK
@@ -152,48 +108,21 @@ public class GrabActivity extends AppCompatActivity implements ActivityCompat.On
 
     }
 
-    private List<LatLng> decodePoly(String encoded) {
-
-        List<LatLng> poly = new ArrayList<LatLng>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
-
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-
-            LatLng p = new LatLng((((double) lat / 1E5)),
-                    (((double) lng / 1E5)));
-            poly.add(p);
-        }
-        return poly;
-    }
-
-    public class GetAndDrawRouteWithTwoLocation extends AsyncTask<LatLng, Void, String> {
+    public class GetAndDrawRouteWithTwoLocation extends AsyncTask<LatLng, Void, List<LatLng>> {
 
         @Override
-        protected String doInBackground(LatLng... params) {
+        protected List<LatLng> doInBackground(LatLng... params) {
             LatLng current = params[0];
-            LatLng des = new LatLng(10.802466, 106.640635);
+            LatLng des = params[1];
+            List<LatLng> total = new ArrayList<>();
+            List<LatLng> list;
+            LatLng anoDes = new LatLng(10.801111, 106.683608);
             String urlRoute = "https://maps.googleapis.com/maps/api/directions/json?origin="
                     + current.latitude + "," + current.longitude + "&destination="
-                    + des.latitude + "," + des.longitude + "&units=metric&mode=walking";
+                    + des.latitude + "," + des.longitude + "&waypoints=" + anoDes.latitude + "," + anoDes.longitude +"&mode=driving";
+//            String urlRoute = "https://maps.googleapis.com/maps/api/directions/json?origin="
+//                    + current.latitude + "," + current.longitude + "&destination="
+//                    + des.latitude + "," + des.longitude + "&mode=driving";
             try {
                 Log.d("KHUONGGGG", urlRoute);
                 URL url = new URL(urlRoute);
@@ -206,11 +135,42 @@ public class GrabActivity extends AppCompatActivity implements ActivityCompat.On
                 while ((temp = bReader.readLine()) != null) {
                     response += temp;
                 }
-                Log.d("KHUONGGGG", response);
+
+                String tmp = new JSONObject(response).getJSONArray("routes").getJSONObject(0)
+                        .getJSONObject("overview_polyline").getString("points");
+                tmp = StringEscapeUtils.unescapeJava(tmp);
+                Log.d("KHUONGGGGGG", tmp);
+                list = PolyUtil.decode(tmp);
+
+                Log.d("KHUONGGGGGG", "list = " + list.size());
+                for (LatLng l : list) {
+                    total.add(l);
+                }
+//                JSONArray j = new JSONObject(response).getJSONArray("routes").getJSONObject(0)
+//                        .getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
+//                for (int i = 0; i < j.length(); i++) {
+//                    String tmp = j.getJSONObject(i).getJSONObject("polyline").getString("points");
+//                    tmp = StringEscapeUtils.unescapeJava(tmp);
+//                    Log.d("KHUONGGGGGG", tmp);
+//                    list = PolyUtil.decode(tmp);
+//                    for (LatLng l : list) {
+//                        total.add(l);
+//                    }
+//                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return null;
+            return total;
+        }
+
+        @Override
+        protected void onPostExecute(List<LatLng> s) {
+            Log.d("KHUONGGGGGG", "s = " + s.size());
+            PolylineOptions polyLineOptions = new PolylineOptions();
+            polyLineOptions.addAll(s);
+            polyLineOptions.width(2);
+            polyLineOptions.color(Color.BLUE);
+            gm.addPolyline(polyLineOptions);
         }
     }
 }

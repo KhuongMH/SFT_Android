@@ -29,6 +29,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'com.google.maps.android', name: 'android-maps-utils', version: '0.4.3'
     compile 'com.android.support:design:23.2.1'
     compile 'com.google.android.gms:play-services:9.0.2'
     compile 'com.squareup.picasso:picasso:2.3.4'
