@@ -23,13 +23,9 @@ import com.example.khuongman.sft_android.Adapter.NavigationAdapter;
 import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Classes.Food;
 import com.example.khuongman.sft_android.Classes.FoodCategory;
-import com.example.khuongman.sft_android.Classes.GPSTracker;
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
 import com.example.khuongman.sft_android.Fragment.MainFragment;
 import com.example.khuongman.sft_android.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -107,7 +103,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     }
 
     public void getFoodDataFromWebService() {
-        Log.d("FKKKKKKKKKKKKKKKKKK","DMMM");
+        Log.d("FKKKKKKKKKKKKKKKKKK", "DMMM");
     }
 
     public void getFoodDataFromLocal() {

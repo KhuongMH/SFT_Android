@@ -16,12 +16,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.PolyUtil;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -112,7 +110,7 @@ public class GrabActivity extends AppCompatActivity implements ActivityCompat.On
             LatLng anoDes = new LatLng(10.801111, 106.683608);
             String urlRoute = "https://maps.googleapis.com/maps/api/directions/json?origin="
                     + current.latitude + "," + current.longitude + "&destination="
-                    + des.latitude + "," + des.longitude + "&waypoints=" + anoDes.latitude + "," + anoDes.longitude +"&mode=driving";
+                    + des.latitude + "," + des.longitude + "&waypoints=" + anoDes.latitude + "," + anoDes.longitude + "&mode=driving";
 //            String urlRoute = "https://maps.googleapis.com/maps/api/directions/json?origin="
 //                    + current.latitude + "," + current.longitude + "&destination="
 //                    + des.latitude + "," + des.longitude + "&mode=driving";

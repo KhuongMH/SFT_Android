@@ -38,8 +38,8 @@
             android:layout_below="@+id/top_tab">
 
         </FrameLayout>
-    </RelativeLayout>
 
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_left_drawer"
@@ -88,11 +88,13 @@
         android:background="@drawable/background_navigation"
         android:choiceMode="singleChoice"
         android:orientation="vertical">
+
         <ImageView
             android:id="@+id/iv_right_navigation"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true" />
+
         <ListView
             android:id="@+id/lv_right_navigation"
             android:layout_width="match_parent"
@@ -101,6 +103,7 @@
             android:background="#E0F7FA"
             android:choiceMode="singleChoice"
             android:divider="#9E9E9E"
-            android:dividerHeight="1px"/>
+            android:dividerHeight="1px" />
     </RelativeLayout>
+
 </android.support.v4.widget.DrawerLayout>

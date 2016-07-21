@@ -1,13 +1,10 @@
 package com.example.khuongman.sft_android.Classes;
 
-/**
- * Created by Man Huynh Khuong on 28/05/16.
- */
 public class LayoutIDWithTitle {
     private int id;
     private String title;
 
-    public LayoutIDWithTitle(){
+    public LayoutIDWithTitle() {
     }
 
     public LayoutIDWithTitle(int id, String title) {

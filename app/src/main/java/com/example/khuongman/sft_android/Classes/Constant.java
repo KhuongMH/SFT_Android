@@ -3,9 +3,6 @@ package com.example.khuongman.sft_android.Classes;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Man Huynh Khuong on 28/05/16.
- */
 public class Constant {
     public static int FRAME_ID = 0;
     public static String FRAME_TAG = "PhamXuanHa ";

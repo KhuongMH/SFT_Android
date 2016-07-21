@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.khuongman.sft_android.Classes.Food;
-import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
 import com.example.khuongman.sft_android.R;
 import com.squareup.picasso.Picasso;
 
@@ -14,9 +13,6 @@ import uk.co.ribot.easyadapter.PositionInfo;
 import uk.co.ribot.easyadapter.annotations.LayoutId;
 import uk.co.ribot.easyadapter.annotations.ViewId;
 
-/**
- * Created by khuong.man on 7/21/2016.
- */
 @LayoutId(R.layout.fragment_food_item)
 public class FoodAdapter extends ItemViewHolder<Food> {
     @ViewId(R.id.iv_food_img)

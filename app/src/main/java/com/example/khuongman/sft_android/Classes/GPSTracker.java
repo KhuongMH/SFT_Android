@@ -13,9 +13,6 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
-/**
- * Created by khuong.man on 5/27/2016.
- */
 public class GPSTracker extends Service implements LocationListener {
     private Activity activity;
     boolean isGPSEnabled = false;
@@ -40,7 +37,7 @@ public class GPSTracker extends Service implements LocationListener {
             Log.d("isNetworkEnabled", isNetworkEnabled + "");
             Log.d("isGPSEnabled", isGPSEnabled + "");
             //First check Connection From Cellphone
-            if(isNetworkEnabled){
+            if (isNetworkEnabled) {
                 this.canGetLocation = true;
                 locationManager.requestLocationUpdates(
                         LocationManager.NETWORK_PROVIDER,
@@ -53,9 +50,7 @@ public class GPSTracker extends Service implements LocationListener {
                         longitude = location.getLongitude();
                     }
                 }
-            } else
-
-            if(isGPSEnabled) {
+            } else if (isGPSEnabled) {
                 this.canGetLocation = true;
                 locationManager.requestLocationUpdates(
                         LocationManager.GPS_PROVIDER,
@@ -77,11 +72,12 @@ public class GPSTracker extends Service implements LocationListener {
 
         return location;
     }
-    public double getLatitude(){
+
+    public double getLatitude() {
         return location.getLatitude();
     }
 
-    public double getLongitude(){
+    public double getLongitude() {
         return location.getLongitude();
     }
 
@@ -89,7 +85,7 @@ public class GPSTracker extends Service implements LocationListener {
         return this.canGetLocation;
     }
 
-    public void showSettingsAlert(){
+    public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
 
         // Setting Dialog Title
@@ -100,7 +96,7 @@ public class GPSTracker extends Service implements LocationListener {
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 activity.startActivity(intent);
             }

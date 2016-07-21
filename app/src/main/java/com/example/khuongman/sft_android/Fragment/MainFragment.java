@@ -10,9 +10,6 @@ import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Event.LeftMenuClickEvent;
 import com.example.khuongman.sft_android.R;
 
-/**
- * Created by Man Huynh Khuong on 28/05/16.
- */
 public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

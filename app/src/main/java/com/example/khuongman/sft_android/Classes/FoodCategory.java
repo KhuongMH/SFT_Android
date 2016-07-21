@@ -3,9 +3,6 @@ package com.example.khuongman.sft_android.Classes;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by khuong.man on 7/20/2016.
- */
 public class FoodCategory {
     private String title;
     private String url;

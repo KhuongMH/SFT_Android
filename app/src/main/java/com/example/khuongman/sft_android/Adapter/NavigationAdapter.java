@@ -13,9 +13,6 @@ import uk.co.ribot.easyadapter.PositionInfo;
 import uk.co.ribot.easyadapter.annotations.LayoutId;
 import uk.co.ribot.easyadapter.annotations.ViewId;
 
-/**
- * Created by khuong.man on 5/20/2016.
- */
 @LayoutId(R.layout.item_navigation)
 public class NavigationAdapter extends ItemViewHolder<LayoutIDWithTitle> {
     @ViewId(R.id.tv_navigation)
@@ -33,6 +30,6 @@ public class NavigationAdapter extends ItemViewHolder<LayoutIDWithTitle> {
                 "fonts/BLKCHCRY.TTF");
         tv_arrow.setTypeface(face);
         tv_navigation.setText(layoutIDWithTitle.getTitle());
-        tv_navigation.setOnClickListener(new LeftMenuClickEvent(getContext(),layoutIDWithTitle.getId()));
+        tv_navigation.setOnClickListener(new LeftMenuClickEvent(getContext(), layoutIDWithTitle.getId()));
     }
 }

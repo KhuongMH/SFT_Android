@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:id="@+id/ll_left_drawer"
         android:layout_width="wrap_content"
@@ -13,6 +12,7 @@
         android:background="@drawable/background_navigation"
         android:choiceMode="singleChoice"
         android:orientation="vertical">
+
         <ListView
             android:id="@+id/lv_left_navigation"
             android:layout_width="match_parent"
@@ -24,11 +24,10 @@
             android:dividerHeight="1px" />
     </LinearLayout>
 
-
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </android.support.v4.widget.DrawerLayout>

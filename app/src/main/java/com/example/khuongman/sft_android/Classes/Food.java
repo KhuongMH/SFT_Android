@@ -1,8 +1,5 @@
 package com.example.khuongman.sft_android.Classes;
 
-/**
- * Created by khuong.man on 7/20/2016.
- */
 public class Food {
     private String name;
     private String image;

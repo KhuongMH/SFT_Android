@@ -24,9 +24,6 @@ import java.util.List;
 
 import uk.co.ribot.easyadapter.EasyAdapter;
 
-/**
- * Created by Man Huynh Khuong on 28/05/16.
- */
 public class LeftMenuClickEvent implements View.OnClickListener {
     int layoutID;
     FragmentTransaction ft;

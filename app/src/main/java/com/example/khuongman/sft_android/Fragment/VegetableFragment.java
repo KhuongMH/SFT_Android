@@ -14,15 +14,13 @@ import com.example.khuongman.sft_android.R;
 
 import uk.co.ribot.easyadapter.EasyAdapter;
 
-/**
- * Created by khuong.man on 7/20/2016.
- */
 public class VegetableFragment extends Fragment {
 
     GridView gv_vegetable;
     EasyAdapter<Food> vegeAdapter;
 
-    public VegetableFragment(){}
+    public VegetableFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

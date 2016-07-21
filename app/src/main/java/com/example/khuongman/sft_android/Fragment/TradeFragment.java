@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 
 import com.example.khuongman.sft_android.R;
 
-/**
- * Created by Man Huynh Khuong on 28/05/16.
- */
 public class TradeFragment extends Fragment {
 
-    public TradeFragment(){}
+    public TradeFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

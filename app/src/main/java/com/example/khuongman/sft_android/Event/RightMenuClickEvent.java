@@ -11,9 +11,6 @@ import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Fragment.KnowledgeFragment;
 import com.example.khuongman.sft_android.R;
 
-/**
- * Created by Man Huynh Khuong on 29/05/16.
- */
 public class RightMenuClickEvent implements View.OnClickListener {
     int layoutID;
     FragmentTransaction ft;

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/llparent"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llparent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    android:paddingTop="3dp"
-    android:background="#FFFFFF">
+    android:paddingTop="3dp">
 
     <RelativeLayout
         android:id="@+id/menu"
@@ -15,6 +15,7 @@
         android:background="#2196F3"
         android:focusable="true"
         android:focusableInTouchMode="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,6 +64,7 @@
                             android:textSize="@dimen/mainpage_font"
                             android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -96,9 +98,11 @@
                             android:text="Trái Cây"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -141,8 +145,9 @@
                             android:text="Thực Phẩm Tươi Sống"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,9 +181,11 @@
                             android:text="Thực Phẩm Đông Lạnh"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -221,8 +228,9 @@
                             android:text="Thực Phẩm Sấy Khô"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -258,9 +266,13 @@
                             android:textSize="@dimen/mainpage_font"
                             android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
 
     </RelativeLayout>
+
 </LinearLayout>

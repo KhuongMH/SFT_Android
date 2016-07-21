@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="20dp"
+    android:orientation="horizontal"
     android:paddingBottom="20dp"
-    android:paddingLeft="5dp">
+    android:paddingLeft="5dp"
+    android:paddingTop="20dp">
+
     <TextView
         android:id="@+id/tv_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#9E9E9E"
-        android:layout_marginTop="6dp"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
-        android:textSize="18dp"
-        android:layout_alignParentLeft="true"/>
+        android:layout_marginTop="6dp"
+        android:textColor="#9E9E9E"
+        android:textSize="18dp" />
+
     <TextView
         android:id="@+id/tv_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:textColor="#9E9E9E"
         android:layout_marginRight="15dp"
-        android:textSize="35dp"
-        android:text=">"/>
+        android:text=">"
+        android:textColor="#9E9E9E"
+        android:textSize="35dp" />
+
 </RelativeLayout>
