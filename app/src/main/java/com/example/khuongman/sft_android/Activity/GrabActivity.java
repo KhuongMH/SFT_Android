@@ -47,65 +47,58 @@ public class GrabActivity extends AppCompatActivity implements ActivityCompat.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grab);
         gm = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        requestLocationPermission();
+        drawOnMap();
     }
 
-    public void requestLocationPermission() {
-
-        Log.d("KHUONGG", "SSSSSSSSSSS");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                        0);
-            }
-
+    public void drawOnMap() {
+        if (checkPermissionLocation()) {
+            getLocationAndDrawOnMap();
         } else {
-            Log.d("KHUONGGGGG", "REGISTERED");
-            GPSTracker gpsTracker = new GPSTracker(GrabActivity.this);
-            LatLng location;
-            if (gpsTracker.getLocation() != null) {
-                location = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-            } else {
-                location = new LatLng(10.786362, 106.691618);
-            }
-            LatLng[] list = new LatLng[2];
-            list[0] = location;
-            list[1] = new LatLng(10.800329, 106.682823);
-            new GetAndDrawRouteWithTwoLocation().execute(list);
-            gm.addMarker(new MarkerOptions().position(location).title("Hello world"));
-            gm.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    0);
         }
+    }
+
+    public boolean checkPermissionLocation() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED || ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+    }
+
+
+    public void getLocationAndDrawOnMap() {
+        GPSTracker gpsTracker = new GPSTracker(GrabActivity.this);
+        LatLng location;
+        if (gpsTracker.getLocation() != null) {
+            location = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+        } else {
+            location = new LatLng(10.786362, 106.691618);
+        }
+        LatLng[] list = new LatLng[2];
+        list[0] = location;
+        list[1] = new LatLng(10.800329, 106.682823);
+        new GetAndDrawRouteWithTwoLocation().execute(list);
+        gm.addMarker(new MarkerOptions().position(location).title("Hello world"));
+        gm.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()), 15));
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Log.d("Khuongggg", "GGGGGG");
         if (requestCode == 0) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //OK
-                GPSTracker gpsTracker = new GPSTracker(GrabActivity.this);
-                LatLng location;
-                if (gpsTracker.getLocation() != null) {
-                    location = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
-                } else {
-                    location = new LatLng(10.786362, 106.691618);
+            if (grantResults.length >= 1) {
+                switch (permissions[0]) {
+                    case Manifest.permission.ACCESS_FINE_LOCATION: {
+                        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                            getLocationAndDrawOnMap();
+                        } else {
+                            finish();
+                        }
+                        break;
+                    }
                 }
-                LatLng[] list = new LatLng[2];
-                list[0] = location;
-                list[1] = new LatLng(10.800329, 106.682823);
-                new GetAndDrawRouteWithTwoLocation().execute(list);
-                gm.addMarker(new MarkerOptions().position(location).title("Hello world"));
-                gm.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude()), 15));
-            } else {
-                //NOT OK
-                finish();
             }
         } else
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
     }
 
     public class GetAndDrawRouteWithTwoLocation extends AsyncTask<LatLng, Void, List<LatLng>> {

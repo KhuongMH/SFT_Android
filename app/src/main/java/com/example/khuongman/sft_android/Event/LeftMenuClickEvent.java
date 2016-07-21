@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
@@ -14,6 +13,7 @@ import com.example.khuongman.sft_android.Activity.MainActivity;
 import com.example.khuongman.sft_android.Adapter.NavigationAdapter;
 import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
+import com.example.khuongman.sft_android.Fragment.VegetableFragment;
 import com.example.khuongman.sft_android.Fragment.KnowledgeFragment;
 import com.example.khuongman.sft_android.Fragment.OwnFarmFragment;
 import com.example.khuongman.sft_android.Fragment.TradeFragment;
@@ -48,6 +48,7 @@ public class LeftMenuClickEvent implements View.OnClickListener {
             return;
         }
         Constant.CURRENT_FRAGMENT = layoutID;
+        MainActivity.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, mainActivity.findViewById(R.id.ll_right_drawer));
         ListView rightNavigation = (ListView) mainActivity.findViewById(R.id.lv_right_navigation);
         List<LayoutIDWithTitle> list = new ArrayList<>();
         EasyAdapter<LayoutIDWithTitle> adapter = new EasyAdapter<>(mainActivity, NavigationAdapter.class, list);
@@ -108,6 +109,9 @@ public class LeftMenuClickEvent implements View.OnClickListener {
                 Intent intent = new Intent(mainActivity, GrabActivity.class);
                 mainActivity.startActivity(intent);
                 return;
+            }
+            case Constant.RAU_CU_QUA: {
+                ft.replace(Constant.FRAME_ID, new VegetableFragment());
             }
         }
         ft.addToBackStack("PhamThiXuanHa " + Constant.FRAGMENT_COUNT++);

@@ -1,5 +1,8 @@
 package com.example.khuongman.sft_android.Classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Man Huynh Khuong on 28/05/16.
  */
@@ -10,6 +13,7 @@ public class Constant {
     public static int CURRENT_FRAGMENT = -1;
     public static int LOCATION_PERMISSION = 0;
     public static int WAIT_PERMISSION = 0;
+    public static List<FoodCategory> CATEGORIES = new ArrayList<>();
 
     //LEFT NAVIGATION
     public final static int KIEN_THUC_NONG_NGHIEP = 0;

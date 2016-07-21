@@ -49,7 +49,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_lib" />
+                            android:src="@drawable/vegetable" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                             android:layout_centerInParent="true"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="Kiến Thức Nông Nghiệp"
+                            android:text="Rau Củ Quả"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
                             android:textStyle="bold" />
@@ -84,7 +84,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_price" />
+                            android:src="@drawable/fruit" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -93,10 +93,10 @@
                             android:layout_centerInParent="true"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="Giá Cả Thị Trường"
+                            android:text="Trái Cây"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -129,7 +129,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_trade" />
+                            android:src="@drawable/meat" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -138,10 +138,10 @@
                             android:layout_centerInParent="true"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="Buôn Bán Nông Sản"
+                            android:text="Thực Phẩm Tươi Sống"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -164,7 +164,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_qa" />
+                            android:src="@drawable/cold_food" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -173,10 +173,10 @@
                             android:layout_centerInParent="true"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="Hỏi Đáp"
+                            android:text="Thực Phẩm Đông Lạnh"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -209,7 +209,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_owntree" />
+                            android:src="@drawable/dried_fruit" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -218,10 +218,10 @@
                             android:layout_centerInParent="true"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="Khu Vườn Của Bạn"
+                            android:text="Thực Phẩm Sấy Khô"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -244,7 +244,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/ic_grab" />
+                            android:src="@drawable/food_box" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -253,7 +253,7 @@
                             android:layout_centerInParent="true"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="Grab Đi Chợ"
+                            android:text="Thực Phẩm Đóng Hộp"
                             android:textColor="#757575"
                             android:textSize="@dimen/mainpage_font"
                             android:textStyle="bold" />

@@ -30,7 +30,6 @@ public class MainFragment extends Fragment {
                 Constant.KHU_VUON_CUA_BAN));
         view.findViewById(R.id.ll_bottom_2).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.GRAB_DI_CHO));
-
         return view;
     }
 }
