@@ -36,7 +36,7 @@ public class RightMenuClickEvent implements View.OnClickListener {
                 break;
             }
         }
-        ft.addToBackStack("PhamThiXuanHa " + Constant.FRAGMENT_COUNT++);
+        ft.addToBackStack("ST " + Constant.FRAGMENT_COUNT++);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }

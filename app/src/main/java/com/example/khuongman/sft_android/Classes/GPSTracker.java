@@ -37,6 +37,7 @@ public class GPSTracker extends Service implements LocationListener {
             Log.d("isNetworkEnabled", isNetworkEnabled + "");
             Log.d("isGPSEnabled", isGPSEnabled + "");
             //First check Connection From Cellphone
+
             if (isNetworkEnabled) {
                 this.canGetLocation = true;
                 locationManager.requestLocationUpdates(

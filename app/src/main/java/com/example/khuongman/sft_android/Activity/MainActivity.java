@@ -4,11 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.multidex.MultiDex;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
@@ -24,15 +29,19 @@ import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Classes.Food;
 import com.example.khuongman.sft_android.Classes.FoodCategory;
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
+import com.example.khuongman.sft_android.Event.CameraClickEvent;
 import com.example.khuongman.sft_android.Fragment.MainFragment;
+import com.example.khuongman.sft_android.Fragment.OwnFarm.CameraSellFragment;
 import com.example.khuongman.sft_android.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import uk.co.ribot.easyadapter.EasyAdapter;
@@ -52,7 +61,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFoodData();
+//        loadFoodData();
         iv_navigation = (ImageView) findViewById(R.id.iv_navigation);
         lv_navigation = (ListView) findViewById(R.id.lv_left_navigation);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -158,7 +167,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 0) {
-            if (grantResults.length >= 1) {
+            if (grantResults.length == 1) {
                 switch (permissions[0]) {
                     case Manifest.permission.ACCESS_NETWORK_STATE: {
                         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -171,11 +180,24 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 
                     case Manifest.permission.READ_EXTERNAL_STORAGE: {
                         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                            acceptedPermissionReadExternal();
-                        } else {
+//                            acceptedPermissionReadExternal();
+                            Constant.acceptedPermissionReadExternal(this);
                         }
                         break;
                     }
+                }
+            } else if (grantResults.length > 1) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                        String fileName = "" + Constant.PHOTO_COUNT++;
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Constant.uriPhotoExternalStorage(Constant.APP_NAME, fileName));
+                        startActivityForResult(cameraIntent, Constant.TAKE_PHOTO_CODE);
+                    } else {
+                        getFragmentManager().popBackStack();
+                    }
+                } else {
+                    getFragmentManager().popBackStack();
                 }
             }
         } else
@@ -204,7 +226,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         list.add(new LayoutIDWithTitle(Constant.GIA_CA_THI_TRUONG, "Giá Cả Thị Trường"));
         list.add(new LayoutIDWithTitle(Constant.BUON_BAN_NONG_SAN, "Buôn Bán Nông Sản"));
         list.add(new LayoutIDWithTitle(Constant.HOI_DAP_THAC_MAC, "Hỏi Đáp - Thắc Mắc"));
-        list.add(new LayoutIDWithTitle(Constant.KHU_VUON_CUA_BAN, "Khu vườn Của Bạn"));
+        list.add(new LayoutIDWithTitle(Constant.VUON_CUA_BAN, "Vườn Của Bạn"));
         list.add(new LayoutIDWithTitle(Constant.GRAB_DI_CHO, "Grab Đi Chợ"));
         navigationAdapter = new EasyAdapter<>(this, NavigationAdapter.class, list);
         lv_navigation.setAdapter(navigationAdapter);
@@ -219,5 +241,26 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             Constant.CURRENT_FRAGMENT = -1;
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, findViewById(R.id.ll_right_drawer));
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constant.TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
+            Constant.CHOSEN_PHOTOS.add(Constant.CURRENT_PHOTO_PATH);
+            CameraSellFragment.chosenPhotoAdapter.notifyDataSetChanged();
+        }
+        if (requestCode == Constant.RESULT_LOAD_IMG && resultCode == RESULT_OK
+                && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            Constant.CHOSEN_PHOTOS.add(cursor.getString(columnIndex));
+            CameraSellFragment.chosenPhotoAdapter.notifyDataSetChanged();
+        }
+
     }
 }

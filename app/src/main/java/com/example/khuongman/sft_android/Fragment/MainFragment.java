@@ -24,7 +24,7 @@ public class MainFragment extends Fragment {
         view.findViewById(R.id.ll_middle_2).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.HOI_DAP_THAC_MAC));
         view.findViewById(R.id.ll_bottom_1).setOnClickListener(new LeftMenuClickEvent(getActivity(),
-                Constant.KHU_VUON_CUA_BAN));
+                Constant.VUON_CUA_BAN));
         view.findViewById(R.id.ll_bottom_2).setOnClickListener(new LeftMenuClickEvent(getActivity(),
                 Constant.GRAB_DI_CHO));
         return view;

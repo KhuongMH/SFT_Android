@@ -1,4 +1,4 @@
-package com.example.khuongman.sft_android.Fragment;
+package com.example.khuongman.sft_android.Fragment.Knowledge;
 
 import android.app.Fragment;
 import android.os.Bundle;

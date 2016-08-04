@@ -13,8 +13,9 @@ import com.example.khuongman.sft_android.Activity.MainActivity;
 import com.example.khuongman.sft_android.Adapter.NavigationAdapter;
 import com.example.khuongman.sft_android.Classes.Constant;
 import com.example.khuongman.sft_android.Classes.LayoutIDWithTitle;
-import com.example.khuongman.sft_android.Fragment.VegetableFragment;
+import com.example.khuongman.sft_android.Fragment.Knowledge.VegetableFragment;
 import com.example.khuongman.sft_android.Fragment.KnowledgeFragment;
+import com.example.khuongman.sft_android.Fragment.OwnFarm.CameraSellFragment;
 import com.example.khuongman.sft_android.Fragment.OwnFarmFragment;
 import com.example.khuongman.sft_android.Fragment.TradeFragment;
 import com.example.khuongman.sft_android.R;
@@ -27,18 +28,16 @@ import uk.co.ribot.easyadapter.EasyAdapter;
 public class LeftMenuClickEvent implements View.OnClickListener {
     int layoutID;
     FragmentTransaction ft;
-    Context context;
     MainActivity mainActivity;
 
 
     public LeftMenuClickEvent(Context context, int layoutID) {
-        this.context = context;
+        this.mainActivity = (MainActivity) context;
         this.layoutID = layoutID;
     }
 
     @Override
     public void onClick(View view) {
-        mainActivity = (MainActivity) context;
         if (Constant.CURRENT_FRAGMENT == layoutID) {
             ((DrawerLayout) mainActivity.findViewById(R.id.drawer_layout))
                     .closeDrawer(Gravity.LEFT);
@@ -58,6 +57,9 @@ public class LeftMenuClickEvent implements View.OnClickListener {
                 .closeDrawer(Gravity.LEFT);
         switch (layoutID) {
             case Constant.KIEN_THUC_NONG_NGHIEP: {
+                break;
+            }
+            case Constant.GIA_CA_THI_TRUONG: {
                 ft.replace(Constant.FRAME_ID, new KnowledgeFragment());
                 list.clear();
                 list.add(new LayoutIDWithTitle(Constant.RAU_CU_QUA, "Rau Củ Quả"));
@@ -68,9 +70,6 @@ public class LeftMenuClickEvent implements View.OnClickListener {
                 list.add(new LayoutIDWithTitle(Constant.THUC_PHAM_DONG_HOP, "Thực Phẩm Đóng Hộp"));
                 adapter.setItems(list);
                 adapter.notifyDataSetChanged();
-                break;
-            }
-            case Constant.GIA_CA_THI_TRUONG: {
                 break;
             }
             case Constant.BUON_BAN_NONG_SAN: {
@@ -89,7 +88,7 @@ public class LeftMenuClickEvent implements View.OnClickListener {
             case Constant.HOI_DAP_THAC_MAC: {
                 break;
             }
-            case Constant.KHU_VUON_CUA_BAN: {
+            case Constant.VUON_CUA_BAN: {
                 ft.replace(Constant.FRAME_ID, new OwnFarmFragment());
                 list.clear();
                 list.add(new LayoutIDWithTitle(Constant.TONG_QUAN, "Tổng Quan"));
@@ -97,7 +96,7 @@ public class LeftMenuClickEvent implements View.OnClickListener {
                 list.add(new LayoutIDWithTitle(Constant.NHAC_NHO, "Nhắc Nhở"));
                 list.add(new LayoutIDWithTitle(Constant.GOI_Y, "Gợi Ý"));
                 list.add(new LayoutIDWithTitle(Constant.XOM_VUON, "Xóm Vườn"));
-                list.add(new LayoutIDWithTitle(Constant.ALBUM_ANH, "Album Ảnh"));
+                list.add(new LayoutIDWithTitle(Constant.CHUP_HINH_RAO_BAN, "Chụp Hình Rao Bán"));
                 adapter.setItems(list);
                 adapter.notifyDataSetChanged();
                 break;
@@ -110,8 +109,11 @@ public class LeftMenuClickEvent implements View.OnClickListener {
             case Constant.RAU_CU_QUA: {
                 ft.replace(Constant.FRAME_ID, new VegetableFragment());
             }
+            case Constant.CHUP_HINH_RAO_BAN: {
+                ft.replace(Constant.FRAME_ID, new CameraSellFragment());
+            }
         }
-        ft.addToBackStack("PhamThiXuanHa " + Constant.FRAGMENT_COUNT++);
+        ft.addToBackStack("ST " + Constant.FRAGMENT_COUNT++);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
         rightNavigation.setVisibility(View.VISIBLE);
